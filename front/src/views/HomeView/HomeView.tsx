@@ -1,10 +1,14 @@
-import CardList from "@/components/CardList/CardList"
-
+import IpadList from '@/components/IpadList/IpadList'
+import IphoneList from '@/components/IphoneList/IphoneList'
+import React from 'react'
 
 const HomeView = () => {
     
     return (
-        <CardList />
+        <div>
+            <IphoneList />
+            <IpadList />
+        </div>
     )
 }
 

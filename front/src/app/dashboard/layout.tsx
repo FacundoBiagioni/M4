@@ -3,7 +3,7 @@ import React from "react";
 
 export default function DashboardLayout({children}: {children: React.ReactNode}) {
     return (
-        <>
+        <div className="">
             <nav>
                 <Link href="/dashboard">Perfil </Link>
                 <Link href="/dashboard/orders">Ordenes </Link>
@@ -11,6 +11,6 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
             <main>
                 {children}
             </main>
-        </>
+        </div>
     )
 }
