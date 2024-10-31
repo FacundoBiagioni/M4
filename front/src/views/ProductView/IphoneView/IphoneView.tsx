@@ -1,4 +1,4 @@
-import IphoneList from "@/components/IphoneList/IphoneList"
+import IphoneList from "@/components/productos/IphoneList/IphoneList"
 
 
 const IphoneView = () => {

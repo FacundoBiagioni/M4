@@ -23,5 +23,4 @@ export function validateRegisterForm(values: IRegisterProps) {
 
     return errors;
 
-
 }

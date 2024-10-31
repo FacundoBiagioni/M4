@@ -1,4 +1,4 @@
-import MacView from '@/views/MacView/MacView'
+import MacView from '@/views/ProductView/MacView/MacView'
 import React from 'react'
 
 const Mac = () => {

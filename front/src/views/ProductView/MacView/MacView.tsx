@@ -1,4 +1,4 @@
-import MacList from "@/components/MacList/MacList"
+import MacList from "@/components/productos/MacList/MacList"
 
 
 const MacView = () => {

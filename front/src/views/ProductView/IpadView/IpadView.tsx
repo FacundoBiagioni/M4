@@ -1,4 +1,4 @@
-import IpadList from "@/components/IpadList/IpadList"
+import IpadList from "@/components/productos/IpadList/IpadList"
 
 
 const IpadView = () => {

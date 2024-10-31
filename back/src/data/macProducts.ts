@@ -1,7 +1,14 @@
-import { IProduct } from "@/types";
+interface IProduct {
+    name: string;
+    price: number;
+    description: string;
+    image: string;
+    categoryId: number;
+    stock: number;
+    id: number;
+}
 
-
-const macproducts: IProduct[] = [
+export const macProducts: IProduct[] = [
     {
         id: 1,
         name: "mac #",
@@ -57,5 +64,3 @@ const macproducts: IProduct[] = [
         stock: 10,
     },
   ];
-
-  export default macproducts;

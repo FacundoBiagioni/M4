@@ -1,5 +1,5 @@
-import IpadList from '@/components/IpadList/IpadList'
-import IphoneList from '@/components/IphoneList/IphoneList'
+import IpadList from '@/components/productos/IpadList/IpadList'
+import IphoneList from '@/components/productos/IphoneList/IphoneList'
 import React from 'react'
 
 const HomeView = () => {

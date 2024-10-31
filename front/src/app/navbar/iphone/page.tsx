@@ -1,4 +1,4 @@
-import IphoneView from '@/views/IphoneView/IphoneView'
+import IphoneView from '@/views/ProductView/IphoneView/IphoneView'
 import React from 'react'
 
 const Iphone = () => {

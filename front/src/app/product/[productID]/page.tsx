@@ -1,10 +1,13 @@
 import React from "react";
 import ProductDetail from "@/views/ProductDetail/ProductDetail";
+import { getProductsById } from "@/helpers/products.helpers";
 
 
-const Detail:React.FC<{params: {productID: string}}> = ({params}) => {
+const Detail:React.FC<{params: {productID: string}}> = async ({params}) => {
+    const product = await getProductsById(params.productID);
+    console.log(product)
     return (
-        <ProductDetail />
+        <ProductDetail {...product} />
     )
 
 }
