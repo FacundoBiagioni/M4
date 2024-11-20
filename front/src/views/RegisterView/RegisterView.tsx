@@ -1,114 +1,128 @@
-'use client'
-import { validateRegisterForm } from '@/helpers/validate'
-import { TRegisterErrors, IRegisterProps } from '@/types'
-import React, { useEffect, useState } from 'react'
+'use client';
+import { validateRegisterForm } from '@/helpers/validate';
+import { IRegisterErrors, IRegisterProps } from '@/types'; 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-const RegisterView = () => {
+const initialState: IRegisterProps = {
+  email: "",
+  password: "",
+  name: "",
+  address: "",
+  phone: ""
+};
 
-  const initialState = {
-    email: "",
-    password: "",
-    name: "",
-    address: "",
-    phone: ""
-  }
+const RegisterView: React.FC = () => {
+  const router = useRouter();
+  const [userData, setUserData] = useState<IRegisterProps>(initialState);
+  const [signupErrors, setSignupErrors] = useState<IRegisterErrors>({});
 
-  const [dataUser, setDataUser] = useState<IRegisterProps>(initialState)
-  const [errors, setErrors] = useState<TRegisterErrors>(initialState)
-
+  // Handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log("Submit exitoso")
-  }
+    event.preventDefault();
+    
+    // Validar los datos usando la función de validación
+    const { valid, errors } = validateRegisterForm(userData);
+    
+    // Si el formulario no es válido, actualizamos los errores y terminamos el envío
+    if (!valid) {
+      setSignupErrors(errors);
+      alert('Hubo un error de validación');
+      return;
+    }
 
+    try {
+      const response = await register(userData);
+      if (response) {
+        console.log("Registro exitoso");
+        setUserData(initialState); // Limpiar los datos del formulario
+        router.push("/login"); // Redirigir al login
+      }
+    } catch (error) {
+      console.error("Error al registrar:", error);
+    }
+  };
+
+  // Maneja los cambios en los inputs
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
-    setDataUser({
-      ...dataUser,
-      [name]: value
-    })
-  }
-
-  useEffect(() => {
-    const errors = validateRegisterForm(dataUser)
-    setErrors(errors)
-  }, [dataUser])
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value.trim() }); // Actualizar los datos del usuario
+    setSignupErrors({ ...signupErrors, [name]: "" }); // Limpiar el error asociado con ese campo
+  };
 
   return (
-    <div>
-      <h1>Register in to Apple Store</h1>
+    <form onSubmit={handleSubmit}>
+      <div>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={userData.email}
+          placeholder='johndoe@example.com'
+          onChange={handleChange}
+        />
+        {signupErrors.email && <p>{signupErrors.email}</p>}
+      </div>
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={userData.password}
+          placeholder='***********'
+          onChange={handleChange}
+        />
+        {signupErrors.password && <p>{signupErrors.password}</p>}
+      </div>
+      <div>
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          value={userData.name}
+          placeholder='Steve Jobs'
+          onChange={handleChange}
+        />
+        {signupErrors.name && <p>{signupErrors.name}</p>}
+      </div>
+      <div>
+        <label>Address</label>
+        <input
+          type="text"
+          name="address"
+          value={userData.address}
+          placeholder='San Francisco, California'
+          onChange={handleChange}
+        />
+        {signupErrors.address && <p>{signupErrors.address}</p>}
+      </div>
+      <div>
+        <label>Phone</label>
+        <input
+          type="text"
+          name="phone"
+          value={userData.phone}
+          placeholder='221-333-4343'
+          onChange={handleChange}
+        />
+        {signupErrors.phone && <p>{signupErrors.phone}</p>}
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  );
+};
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='email_address'>Email:</label>
-          <input
-            id='email_address'
-            type='email'
-            name='email'
-            value={dataUser.email}
-            placeholder='johndoe@example.com'
-            onChange={handleChange}
-          />
-          {errors.email && <span>{errors.email}</span>}
-        </div>
+// Función de simulación para registrar
+const register = async (data: IRegisterProps): Promise<boolean> => {
+  console.log("Datos enviados al servidor:", data);
+  return true; // Simular un registro exitoso
+};
 
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            id='password'
-            type='password'
-            name='password'
-            value={dataUser.password}
-            placeholder='***********'
-            onChange={handleChange}
-          />
-          {errors.password && <span>{errors.password}</span>}
-        </div>
-
-        <div>
-          <label htmlFor='name'>Name:</label>
-          <input
-            id='name'
-            type='text'
-            name='name'
-            value={dataUser.name}
-            placeholder='Steve Jobs'
-            onChange={handleChange}
-          />
-          {errors.name && <span>{errors.name}</span>}
-        </div>
-
-        <div>
-          <label htmlFor='address'>Address:</label>
-          <input
-            id='address'
-            type='text'
-            name='address'
-            value={dataUser.address}
-            placeholder='San Francisco, California'
-            onChange={handleChange}
-          />
-          {errors.address && <span>{errors.address}</span>}
-        </div>
-
-        <div>
-          <label htmlFor='phone'>Phone:</label>
-          <input
-            id='phone'
-            type='text'
-            name='phone'
-            value={dataUser.phone}
-            placeholder='221-333-4343'
-            onChange={handleChange}
-          />
-          {errors.phone && <span>{errors.phone}</span>}
-        </div>
-
-        <button type='submit'>Register</button>
-
-      </form>
-    </div>
-  )
-}
-
-export default RegisterView
+export default RegisterView;

@@ -11,8 +11,8 @@ interface IProduct {
 export const macProducts: IProduct[] = [
     {
         id: 1,
-        name: "mac #",
-        price: 699,
+        name: "mac 22",
+        price: 600,
         description: "Experience power and elegance with the mac #: capture stunning moments with its dual-camera system, enjoy exceptional performance, and immerse yourself in a brilliant Liquid Retina display. Discover a world of possibilities in the palm of your hand!",
         image: "https://i0.wp.com/shop.litecorp.com.ar/wp-content/uploads/2024/07/MacBook_Pro_13-inch_Silver_PDP_Image_Position-1__ROSA_preview_rev_1.png?fit=500%2C500&ssl=1",
         categoryId: 2,
