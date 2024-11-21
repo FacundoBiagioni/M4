@@ -3,6 +3,7 @@ import { validateRegisterForm } from '@/helpers/validate';
 import { IRegisterErrors, IRegisterProps } from '@/types'; 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const initialState: IRegisterProps = {
   email: "",
@@ -27,39 +28,63 @@ const RegisterView: React.FC = () => {
     // Si el formulario no es válido, actualizamos los errores y terminamos el envío
     if (!valid) {
       setSignupErrors(errors);
-      alert('Hubo un error de validación');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error de validación',
+        text: 'Por favor, completa correctamente todos los campos del formulario.',
+      });
       return;
     }
 
     try {
-      const response = await register(userData);
-      if (response) {
+      // Aquí es donde haces la solicitud a la API de registro
+      const response = await fetch('http://localhost:5000/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
         console.log("Registro exitoso");
         setUserData(initialState); // Limpiar los datos del formulario
-        router.push("/login"); // Redirigir al login
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro exitoso!',
+          text: 'Te has registrado correctamente. Ahora puedes iniciar sesión.',
+        }).then(() => {
+          router.push("/login"); // Redirigir al login
+        });
+      } else {
+        const errorData = await response.json();
+        console.error("Error al registrar:", errorData.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de registro',
+          text: errorData.message || 'Hubo un problema al intentar registrarte.',
+        });
       }
     } catch (error) {
       console.error("Error al registrar:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error de conexión',
+        text: 'Hubo un error al intentar conectarse al servidor. Intenta más tarde.',
+      });
     }
   };
 
   // Maneja los cambios en los inputs
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserData({ ...userData, [name]: value.trim() }); // Actualizar los datos del usuario
-    setSignupErrors({ ...signupErrors, [name]: "" }); // Limpiar el error asociado con ese campo
+    setUserData({ ...userData, [name]: value.trim() });
+    setSignupErrors({ ...signupErrors, [name]: "" });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
         <label>Email</label>
         <input
           type="email"
@@ -117,12 +142,6 @@ const RegisterView: React.FC = () => {
       <button type="submit">Register</button>
     </form>
   );
-};
-
-// Función de simulación para registrar
-const register = async (data: IRegisterProps): Promise<boolean> => {
-  console.log("Datos enviados al servidor:", data);
-  return true; // Simular un registro exitoso
 };
 
 export default RegisterView;

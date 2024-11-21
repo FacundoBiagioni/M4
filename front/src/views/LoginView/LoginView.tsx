@@ -1,20 +1,10 @@
-
-
-
-
-
-//! NO ME INICIA SESSIONNNNNNNNNNNNNNNN
-
-
-
-
 'use client';
-import { login } from '@/helpers/auth';
 import { validateLoginForm } from '@/helpers/validate';
 import { ILoginErrors, ILoginProps } from '@/types';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
+import Swal from 'sweetalert2';
 
 const initialState: ILoginProps = {
   email: '',
@@ -30,43 +20,58 @@ const LoginView = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Validación del formulario
     const { valid, errors } = validateLoginForm(userData);
 
     if (!valid) {
       setLoginErrors(errors);
-      alert('Hubo un error de validación');
-      // await Swal.fire({
-      // icon: "error",
-      // title: "Error de Validacíón",
-      // html: `<ul>${Object.values(errors)
-      // .filter((msg) => msg)
-      // .map((msg) => `<li>${msg}</li>)`)
-      // .join("")}</ul>`,
-      // })
+      // Mostrar alerta de error de validación con SweetAlert
+      await Swal.fire({
+        icon: "error",
+        title: "Error de Validación",
+        html: `<ul>${Object.values(errors)
+          .filter((msg) => msg)
+          .map((msg) => `<li>${msg}</li>)`)
+          .join("")}</ul>`,
+      });
       return;
     }
 
     try {
-      const response = await login(userData);
-      const { token, user } = response;
+      // Solicitud al backend de login
+      const response = await fetch('http://localhost:5000/users/login', {  // Asegúrate de que esta sea la URL correcta
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
 
-      Cookies.set("userData", JSON.stringify({ token, user }) , { expires: 1 });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error desconocido");
+      }
 
-      alert('Login exitoso');
-      // await Swal.fire({
-      //   icon: "success",
-      //   title: "Éxito",
-      //   text: "Usuario logueado correctamente.",
-      // });
-      router.push('/');
+      const { token, user } = await response.json();
+
+      // Guardar los datos del usuario y el token en cookies
+      Cookies.set("userData", JSON.stringify({ token, user }), { expires: 1 });
+
+      // Mostrar alerta de éxito con SweetAlert
+      await Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Usuario logueado correctamente.",
+      });
+
+      router.push('/'); // Redirigir a la página principal o dashboard
     } catch (error) {
       console.error(error);
-      alert('Hubo un problema');
-      // await Swal.fire({
-      //   icon: "error",
-      //   title: "Error de Login",
-      //   text: "Contraseña o usuario incorrecto",
-      // });
+      await Swal.fire({
+        icon: "error",
+        title: "Error de Login",
+        text: "Contraseña o usuario incorrecto",
+      });
     }
   };
 
@@ -80,13 +85,6 @@ const LoginView = () => {
 
   return (
     <div>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
-      <p>.</p>
       <h1>Sign in to Apple Store</h1>
 
       <form onSubmit={handleSubmit}>

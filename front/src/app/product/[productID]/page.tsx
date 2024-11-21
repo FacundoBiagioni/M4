@@ -1,5 +1,5 @@
 import React from "react";
-import ProductDetail from "@/views/ProductDetail/ProductDetail";
+import ProductDetail from "@/views/ProductView/ProductDetail/ProductDetail";
 import { getProductsById } from "@/helpers/products.helpers";
 
 

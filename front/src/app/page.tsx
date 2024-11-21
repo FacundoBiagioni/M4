@@ -2,10 +2,7 @@
 
 export default function Home() {
   return (
-    <section className="pt-10">
-      <div>
-        <h1 className="transform -translate-y-4 text-3xl font-bold ml-8 mb-5">Welcome to Apple</h1>
-      </div>
+    <section className="mt-4">
       <div className="flex justify-center mb-4">
         <video controls className="w-auto h-auto flex justify-center rounded-3xl" loop>
           <source src="https://www.apple.com/105/media/us/iphone/family/2024/cf19f185-dd7e-4350-97ff-e44860713b54/anim/welcome/xlarge.mp4" type="video/mp4" />
@@ -13,7 +10,8 @@ export default function Home() {
         </video>
       </div>
       <div>
-        <h3 className="text-2xl font-bold text-center mb-12 mt-16">Explore a new world of technology</h3>
+        <h3 className="text-2xl font-bold text-center mb-16 mt-16">
+          Explore a new world of technology</h3>
       </div>
       <div className="grid grid-cols-2 gap-4">
          <div className="relative overflow-hidden flex items-center justify-center flex-col w-full h-96">
@@ -23,7 +21,7 @@ export default function Home() {
       <p>muy piola etc etc</p>
     </figcaption>
     <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0">
-      <button className="text-xl px-4 py-2 rounded text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
+      <button className="text-xl px-4 py-2 rounded-3xl text-white bg-blue-600 absolute bottom-80 left-1/2 -translate-x-1/2 -translate-y-">View product</button>
     </div>
   </div>
          <div className="relative overflow-hidden flex items-center justify-center flex-col w-full h-96">
@@ -33,7 +31,7 @@ export default function Home() {
       <p>muy piola etc etc</p>
     </figcaption>
     <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0">
-      <button className="text-xl px-4 py-2 rounded text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
+      <button className="text-xl px-4 py-2 rounded-3xl text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
     </div>
   </div>
          <div className="relative overflow-hidden flex items-center justify-center flex-col w-full h-96">
@@ -43,7 +41,7 @@ export default function Home() {
       <p>muy piola etc etc</p>
     </figcaption>
     <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0">
-      <button className="text-xl px-4 py-2 rounded text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
+      <button className="text-xl px-4 py-2 rounded-3xl text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
     </div>
   </div>
          <div className="relative overflow-hidden flex items-center justify-center flex-col w-full h-96">
@@ -53,7 +51,7 @@ export default function Home() {
       <p>muy piola etc etc</p>
     </figcaption>
     <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0">
-      <button className="text-xl px-4 py-2 rounded text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
+      <button className="text-xl px-4 py-2 rounded-3xl text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
     </div>
   </div>
          <div className="relative overflow-hidden flex items-center justify-center flex-col w-full h-96 mb-4">
@@ -63,7 +61,7 @@ export default function Home() {
       <p>muy piola etc etc</p>
     </figcaption>
     <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0">
-      <button className="text-xl px-4 py-2 rounded text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
+      <button className="text-xl px-4 py-2 rounded-3xl text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
     </div>
   </div>
          <div className="relative overflow-hidden flex items-center justify-center flex-col w-full h-96 mb-4">
@@ -73,7 +71,7 @@ export default function Home() {
       <p>muy piola etc etc</p>
     </figcaption>
     <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0">
-      <button className="text-xl px-4 py-2 rounded text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
+      <button className="text-xl px-4 py-2 rounded-3xl text-white bg-blue-600 absolute bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">View product</button>
     </div>
   </div>
       </div>

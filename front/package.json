@@ -14,7 +14,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "sass": "^1.79.5"
+    "sass": "^1.79.5",
+    "sweetalert2": "^11.14.5"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
