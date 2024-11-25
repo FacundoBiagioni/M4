@@ -62,4 +62,13 @@ export interface IUserSession {
             password: string;
         };
     };
+
 }
+
+export interface IUserOrder {
+    id: number;
+    status: string;
+    date: Date;
+    products: IProduct[]
+}
+    

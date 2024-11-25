@@ -17,7 +17,6 @@ export async function  register (formData: IRegisterProps) {
                 alert("Hubo un error")
                 throw new Error(`Error ${res.status}: ${res.statusText}`);
             } else {
-                alert("Éxito en el submit")
                   await Swal.fire({
                       title: "Éxito!",
                       text: "Registrado con éxito",
@@ -28,7 +27,6 @@ export async function  register (formData: IRegisterProps) {
             }
         } catch (error) {
             console.log(error);
-            alert("Problemas en el submit")
               await Swal.fire({
                   title: "Érror!",
                   text: "Este mail ya fue utilizado para crear un usuario. Por favor ingresa un mail diferente.",
@@ -52,7 +50,6 @@ export async function  login (formData: ILoginProps) {
                 alert("Hubo un error")
                 throw new Error(`Error ${res.status}: ${res.statusText}`);
             } else {
-                alert("Éxito en el login")
                   await Swal.fire({
                       title: "Éxito!",
                       text: "Registrado con éxito",
@@ -63,7 +60,6 @@ export async function  login (formData: ILoginProps) {
             }
         } catch (error) {
             console.log(error);
-            alert("Problemas en el login")
               await Swal.fire({
                   title: "Érror!",
                   text: "Este mail ya fue utilizado para crear un usuario. Por favor ingresa un mail diferente.",

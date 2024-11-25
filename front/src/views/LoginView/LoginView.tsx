@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Cookies from "js-cookie";
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 const initialState: ILoginProps = {
   email: '',
@@ -121,6 +122,9 @@ const LoginView = () => {
 
         <button type="submit">Sign In</button>
       </form>
+      <div>
+      <Link href="/register" className='text-blue-700'>You dont have an account?</Link>
+      </div>
     </div>
   );
 };

@@ -1,20 +1,25 @@
 "use client"
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Cookies from "js-cookie";
+import React from "react";
 import { IUserSession } from "@/types";
+import OrderList from "@/components/Dashboard/OrderList";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 export const ProfileView: React.FC = () => {
-    const [userData, setUserData] = useState<IUserSession| null>(null);
-    useEffect(() => {
-        const dataCookie = Cookies.get("userData");
-        if (dataCookie) {
-            const parsedData: IUserSession = JSON.parse(dataCookie);
-            setUserData(parsedData);
-        }
-      }, [])
-      
-      console.log(userData)
+
+    const userData: IUserSession = JSON.parse(Cookies.get("userData") || "{}")
+    const router = useRouter() 
+     
+      const handleLogout = async () => {
+        Cookies.remove("userData");
+        await Swal.fire({
+            title: "Logged out",
+            icon: "success",
+            text:"You have successfully logged out"
+        })
+        router.push("/")
+      }
 
     return (
         //! comletar esto y tambien agregarle estilos
@@ -31,9 +36,15 @@ export const ProfileView: React.FC = () => {
                     <strong>Email:</strong> {userData?.user.email}
                 </p>
             </div>
-            <p>Dirección</p>
-            <p>Numero de telefono</p>
+            <div>
+                <h1>My orders</h1>
+                <OrderList userToken={userData?.token} />
+            </div>
+            <div>
+               <button onClick={handleLogout} className="text-blue-700">close session</button>
+            </div>
         </div>
+        
     )
 }
 

@@ -4,6 +4,7 @@ import { IRegisterErrors, IRegisterProps } from '@/types';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 const initialState: IRegisterProps = {
   email: "",
@@ -140,6 +141,11 @@ const RegisterView: React.FC = () => {
         {signupErrors.phone && <p>{signupErrors.phone}</p>}
       </div>
       <button type="submit">Register</button>
+      <div>
+        <p className='text-blue-700'>
+           <Link href="/login">Already have an account</Link>
+        </p>
+      </div>
     </form>
   );
 };
